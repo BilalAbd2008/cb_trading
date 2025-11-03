@@ -10,7 +10,7 @@ const pricingData = {
       price: "$99.99",
       period: "/month",
       whopUrl:
-        "https://whop.com/cb-trading-investing-academy/?pass=pass_s2Y80bvXxWoW3",
+        "https://whop.com/cb-trading-investing-academy/cb-trading-investing-academy/?utm_source=store_page&funnelId=product_0d2d39f9-0c58-418b-af46-c2684a15aca2",
       features: [
         "Daily Trading Setups & Hints.",
         "Specialised & Community Advice.",
@@ -25,7 +25,7 @@ const pricingData = {
       price: "$199",
       period: "/3 month",
       whopUrl:
-        "https://whop.com/cb-trading-investing-academy/?pass=pass_hKlYy8gAQNr9W",
+        "https://whop.com/cb-trading-investing-academy/cb-trading-investing-academy/?utm_source=store_page&funnelId=product_0d2d39f9-0c58-418b-af46-c2684a15aca2",
       features: [
         "Daily Trading Setups & Hints.",
         "Specialised & Community Advice.",
@@ -40,7 +40,7 @@ const pricingData = {
       price: "$299",
       period: "/6 month",
       whopUrl:
-        "https://whop.com/cb-trading-investing-academy/?pass=pass_2gmCCqOtqMqeM",
+        "https://whop.com/cb-trading-investing-academy/cb-trading-investing-academy/?utm_source=store_page&funnelId=product_0d2d39f9-0c58-418b-af46-c2684a15aca2",
       features: [
         "Daily Trading Setups & Hints.",
         "Specialised & Community Advice.",
@@ -57,7 +57,7 @@ const pricingData = {
       price: "$399",
       period: "/year",
       whopUrl:
-        "https://whop.com/cb-trading-investing-academy/?pass=pass_lqXb4ypDJjh47",
+        "https://whop.com/cb-trading-investing-academy/cb-trading-investing-academy/?utm_source=store_page&funnelId=product_0d2d39f9-0c58-418b-af46-c2684a15aca2",
       features: [
         "Daily Trading Setups & Hints.",
         "Specialised & Community Advice.",
@@ -74,7 +74,7 @@ const pricingData = {
       price: "$999",
       period: "",
       whopUrl:
-        "https://whop.com/cb-trading-investing-academy/?pass=pass_xHvtJdP4tZKuE",
+        "https://whop.com/cb-trading-investing-academy/cb-trading-investing-academy/?utm_source=store_page&funnelId=product_0d2d39f9-0c58-418b-af46-c2684a15aca2",
       features: [
         "Daily Trading Setups & Hints.",
         "Specialised & Community Advice.",

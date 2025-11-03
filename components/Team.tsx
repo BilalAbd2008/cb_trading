@@ -38,7 +38,7 @@ function TeamMember({
   return (
     <div
       ref={ref}
-      className={`group relative bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-sm border-2 border-purple-500/40 rounded-2xl overflow-hidden hover:border-purple-400/60 transition-all duration-700 ease-out hover:shadow-lg hover:shadow-purple-500/30 ${
+      className={`card-highlight group relative bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-sm border-2 border-purple-500/40 rounded-2xl overflow-hidden transition-all duration-700 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
@@ -49,14 +49,19 @@ function TeamMember({
           src={member.image}
           alt={member.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover group-hover:scale-110 transition-transform duration-500"
         />
+        <div className="absolute inset-0 bg-purple-600/0 group-hover:bg-purple-600/10 transition-colors duration-300" />
       </div>
 
       {/* Info Container */}
-      <div className="p-4 bg-gradient-to-b from-purple-900/60 to-blue-900/60 backdrop-blur-sm">
-        <h3 className="font-bold text-lg mb-1">{member.name}</h3>
-        <p className="text-sm text-purple-300">{member.role}</p>
+      <div className="p-4 bg-gradient-to-b from-purple-900/60 to-blue-900/60 backdrop-blur-sm group-hover:from-purple-900/80 group-hover:to-blue-900/80 transition-all duration-300">
+        <h3 className="font-bold text-lg mb-1 group-hover:text-purple-300 transition-colors">
+          {member.name}
+        </h3>
+        <p className="text-sm text-purple-300 group-hover:text-purple-200 transition-colors">
+          {member.role}
+        </p>
       </div>
     </div>
   );

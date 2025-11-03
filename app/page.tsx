@@ -10,6 +10,9 @@ import Team from "@/components/Team";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import LeadMagnet from "@/components/LeadMagnet";
+import Newsletter from "@/components/Newsletter";
+import StickyJoinButton from "@/components/StickyJoinButton";
 
 export default function Home() {
   return (
@@ -20,12 +23,17 @@ export default function Home() {
       <MarketCoverage />
       <WhyChooseUs />
       <MemberBenefits />
-      <Pricing />
       <Stats />
+      <Pricing />
       <Testimonials />
       <Team />
+      <LeadMagnet />
+      <div id="newsletter">
+        <Newsletter />
+      </div>
       <FAQ />
       <Footer />
+      <StickyJoinButton />
     </main>
   );
 }

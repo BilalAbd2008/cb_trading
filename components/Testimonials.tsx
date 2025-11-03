@@ -20,44 +20,6 @@ export default function Testimonials() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch reviews from Whop API
-    const fetchReviews = async () => {
-      try {
-        // Using the company/experience ID from the Whop URL
-        const response = await fetch(
-          `https://api.whop.com/api/v5/companies/biz_690ae58e08f7fd/reviews?page=1&per=50`,
-          {
-            headers: {
-              Accept: "application/json",
-            },
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log("Whop API Response:", data);
-
-          // Check different possible data structures
-          const reviewsData = data.reviews || data.data || data;
-
-          if (Array.isArray(reviewsData) && reviewsData.length > 0) {
-            setReviews(reviewsData);
-          } else {
-            // Use fallback testimonials
-            useFallbackTestimonials();
-          }
-        } else {
-          console.log("API response not ok, status:", response.status);
-          useFallbackTestimonials();
-        }
-      } catch (error) {
-        console.error("Error fetching Whop reviews:", error);
-        useFallbackTestimonials();
-      } finally {
-        setLoading(false);
-      }
-    };
-
     const useFallbackTestimonials = () => {
       // Fallback testimonials based on the image
       setReviews([
@@ -95,6 +57,43 @@ export default function Testimonials() {
           created_at: Date.now() / 1000 - 9 * 30 * 24 * 60 * 60, // 9 months ago
         },
       ]);
+    };
+
+    // Fetch reviews from Whop API
+    const fetchReviews = async () => {
+      try {
+        // Using the company/experience ID from the Whop URL
+        const response = await fetch(
+          `https://api.whop.com/api/v5/companies/biz_690ae58e08f7fd/reviews?page=1&per=50`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+
+          // Check different possible data structures
+          const reviewsData = data.reviews || data.data || data;
+
+          if (Array.isArray(reviewsData) && reviewsData.length > 0) {
+            setReviews(reviewsData);
+          } else {
+            // Use fallback testimonials
+            useFallbackTestimonials();
+          }
+        } else {
+          // API endpoint not found or error - silently use fallback
+          useFallbackTestimonials();
+        }
+      } catch (error) {
+        // Network error or CORS - silently use fallback
+        useFallbackTestimonials();
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchReviews();
@@ -137,7 +136,7 @@ export default function Testimonials() {
             {duplicatedReviews.map((review, index) => (
               <div
                 key={`${review.id}-${index}`}
-                className="flex-shrink-0 w-[400px] bg-gradient-to-br from-primary-800/50 to-primary-900/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6"
+                className="card-hover flex-shrink-0 w-[400px] bg-gradient-to-br from-primary-800/50 to-primary-900/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 cursor-pointer"
               >
                 <div className="flex items-center gap-4 mb-4">
                   {review.user.profile_pic_url ? (

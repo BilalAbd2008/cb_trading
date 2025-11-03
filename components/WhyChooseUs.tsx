@@ -43,16 +43,23 @@ function FeatureCard({
   return (
     <div
       ref={ref}
-      className={`bg-gradient-to-br from-purple-900/30 to-primary-800/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-700 ease-out group ${
+      className={`card-highlight bg-gradient-to-br from-purple-900/30 to-primary-800/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-700 ease-out group ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="bg-purple-600/20 group-hover:bg-purple-600/30 w-16 h-16 rounded-xl flex items-center justify-center mb-4 transition">
-        <Icon size={32} className="text-purple-400" />
+      <div className="bg-purple-600/20 group-hover:bg-purple-600/40 w-16 h-16 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
+        <Icon
+          size={32}
+          className="text-purple-400 group-hover:text-purple-300"
+        />
       </div>
-      <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-      <p className="text-gray-300">{feature.description}</p>
+      <h3 className="text-xl font-bold mb-3 group-hover:text-purple-300 transition-colors">
+        {feature.title}
+      </h3>
+      <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
+        {feature.description}
+      </p>
     </div>
   );
 }

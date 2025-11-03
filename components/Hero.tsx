@@ -1,8 +1,57 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Ticker from "@/components/Ticker";
 
+interface Beam {
+  id: number;
+  gradient: string;
+  left: string;
+  width: string;
+  height: string;
+  duration: number;
+  delay: number;
+}
+
 export default function Hero() {
+  const [beams, setBeams] = useState<Beam[]>([]);
+
+  useEffect(() => {
+    // Generate beams on client side only
+    const generatedBeams: Beam[] = [...Array(30)].map((_, i) => {
+      const isBlue = i % 3 === 0;
+      const isPurple = i % 3 === 1;
+      const delay = i * 0.2;
+      const duration = 2.5 + Math.random() * 1.5;
+      const height = 60 + Math.random() * 40;
+      const width = Math.random() > 0.5 ? "3px" : "2px";
+
+      let gradient;
+      if (isBlue) {
+        gradient =
+          "bg-gradient-to-t from-blue-500/60 via-blue-400/30 to-transparent";
+      } else if (isPurple) {
+        gradient =
+          "bg-gradient-to-t from-purple-500/60 via-purple-400/30 to-transparent";
+      } else {
+        gradient =
+          "bg-gradient-to-t from-violet-500/50 via-violet-400/25 to-transparent";
+      }
+
+      return {
+        id: i,
+        gradient,
+        left: `${i * 3.33}%`,
+        width,
+        height: `${height}%`,
+        duration,
+        delay,
+      };
+    });
+
+    setBeams(generatedBeams);
+  }, []);
+
   return (
     <section
       id="home"
@@ -12,41 +61,20 @@ export default function Hero() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-full h-full">
           {/* Blue and Purple vertical beams - More intense */}
-          {[...Array(30)].map((_, i) => {
-            const isBlue = i % 3 === 0;
-            const isPurple = i % 3 === 1;
-            const delay = i * 0.2;
-            const duration = 2.5 + Math.random() * 1.5;
-            const height = 60 + Math.random() * 40;
-            const width = Math.random() > 0.5 ? "3px" : "2px";
-
-            let gradient;
-            if (isBlue) {
-              gradient =
-                "bg-gradient-to-t from-blue-500/60 via-blue-400/30 to-transparent";
-            } else if (isPurple) {
-              gradient =
-                "bg-gradient-to-t from-purple-500/60 via-purple-400/30 to-transparent";
-            } else {
-              gradient =
-                "bg-gradient-to-t from-violet-500/50 via-violet-400/25 to-transparent";
-            }
-
-            return (
-              <div
-                key={i}
-                className={`absolute bottom-0 ${gradient}`}
-                style={{
-                  left: `${i * 3.33}%`,
-                  width: width,
-                  height: `${height}%`,
-                  animation: `glow ${duration}s ease-in-out infinite`,
-                  animationDelay: `${delay}s`,
-                  filter: "blur(1px)",
-                }}
-              />
-            );
-          })}
+          {beams.map((beam) => (
+            <div
+              key={beam.id}
+              className={`absolute bottom-0 ${beam.gradient}`}
+              style={{
+                left: beam.left,
+                width: beam.width,
+                height: beam.height,
+                animation: `glow ${beam.duration}s ease-in-out infinite`,
+                animationDelay: `${beam.delay}s`,
+                filter: "blur(1px)",
+              }}
+            />
+          ))}
         </div>
 
         {/* Gradient overlays for atmosphere - More intense */}
@@ -70,7 +98,7 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="group border-2 border-purple-500/60 hover:border-purple-400 bg-purple-600/10 hover:bg-purple-600/20 px-8 py-3 rounded-md font-semibold transition-all duration-300">
+          <button className="btn-glow group border-2 border-purple-500/50 hover:border-purple-400/70 bg-purple-950/80 hover:bg-purple-900/90 px-8 py-3 rounded-md font-semibold transition-all duration-300 backdrop-blur-sm">
             Subscribe Now
           </button>
         </div>

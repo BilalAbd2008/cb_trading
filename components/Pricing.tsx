@@ -126,36 +126,66 @@ export default function Pricing() {
             tabVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          <div className="inline-flex bg-purple-900/30 rounded-lg p-1 backdrop-blur-sm border border-purple-500/20">
+          <div className="inline-flex bg-black/60 backdrop-blur-sm rounded-full p-1.5 border border-purple-500/30">
             <button
               onClick={() => setActiveTab("monthly")}
-              className={`px-8 py-2.5 rounded-md font-semibold transition-all duration-300 ${
+              className={`relative px-8 py-2.5 rounded-full font-semibold transition-all duration-300 ${
                 activeTab === "monthly"
-                  ? "bg-purple-600 text-white shadow-lg"
-                  : "text-gray-400 hover:text-white"
+                  ? "text-white"
+                  : "text-gray-500 hover:text-gray-300"
               }`}
             >
-              Monthly
+              {activeTab === "monthly" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-500/50" />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    activeTab === "monthly" ? "bg-white" : "bg-gray-600"
+                  }`}
+                />
+                Monthly
+              </span>
             </button>
             <button
               onClick={() => setActiveTab("yearly")}
-              className={`px-8 py-2.5 rounded-md font-semibold transition-all duration-300 ${
+              className={`relative px-8 py-2.5 rounded-full font-semibold transition-all duration-300 ${
                 activeTab === "yearly"
-                  ? "bg-purple-600 text-white shadow-lg"
-                  : "text-gray-400 hover:text-white"
+                  ? "text-white"
+                  : "text-gray-500 hover:text-gray-300"
               }`}
             >
-              Yearly
+              {activeTab === "yearly" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-500/50" />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    activeTab === "yearly" ? "bg-white" : "bg-gray-600"
+                  }`}
+                />
+                Yearly
+              </span>
             </button>
             <button
               onClick={() => setActiveTab("lifetime")}
-              className={`px-8 py-2.5 rounded-md font-semibold transition-all duration-300 ${
+              className={`relative px-8 py-2.5 rounded-full font-semibold transition-all duration-300 ${
                 activeTab === "lifetime"
-                  ? "bg-purple-600 text-white shadow-lg"
-                  : "text-gray-400 hover:text-white"
+                  ? "text-white"
+                  : "text-gray-500 hover:text-gray-300"
               }`}
             >
-              Lifetime
+              {activeTab === "lifetime" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-500/50" />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    activeTab === "lifetime" ? "bg-white" : "bg-gray-600"
+                  }`}
+                />
+                Lifetime
+              </span>
             </button>
           </div>
         </div>
@@ -183,19 +213,23 @@ function PricingCard({ plan, index }: { plan: any; index: number }) {
   return (
     <div
       ref={ref}
-      className={`relative rounded-2xl p-8 bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-sm border border-purple-500/30 hover:border-purple-400/50 transition-all duration-700 ease-out ${
+      className={`card-highlight relative rounded-2xl p-8 bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-sm border border-purple-500/30 transition-all duration-700 ease-out group ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
       style={{ transitionDelay: `${(index + 2) * 150}ms` }}
     >
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-300 mb-2">
+        <h3 className="text-lg font-semibold text-gray-300 group-hover:text-purple-300 mb-2 transition-colors">
           {plan.name}
         </h3>
         <div className="flex items-baseline gap-1">
-          <span className="text-5xl font-bold text-white">{plan.price}</span>
+          <span className="text-5xl font-bold text-white group-hover:text-purple-100 transition-colors">
+            {plan.price}
+          </span>
           {plan.period && (
-            <span className="text-gray-400 text-lg">{plan.period}</span>
+            <span className="text-gray-400 group-hover:text-gray-300 text-lg transition-colors">
+              {plan.period}
+            </span>
           )}
         </div>
       </div>
@@ -230,7 +264,7 @@ function PricingCard({ plan, index }: { plan: any; index: number }) {
         href={plan.whopUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50 text-center"
+        className="block w-full bg-primary-900/80 hover:bg-gradient-to-r hover:from-purple-900 hover:via-purple-800 hover:to-blue-900 border-2 border-purple-500/40 hover:border-purple-400/70 py-3 rounded-lg font-semibold transition-all duration-300 text-center backdrop-blur-sm hover:shadow-[0_0_35px_rgba(168,85,247,0.8),0_0_70px_rgba(168,85,247,0.6),0_0_105px_rgba(168,85,247,0.5),0_0_140px_rgba(168,85,247,0.4)] hover:scale-105"
       >
         Subscribe Now
       </a>

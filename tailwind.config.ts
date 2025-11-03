@@ -27,6 +27,10 @@ const config: Config = {
         "gradient-purple": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         "gradient-blue": "linear-gradient(135deg, #667eea 0%, #3b82f6 100%)",
       },
+      gridTemplateRows: {
+        "0": "0fr",
+        "1": "1fr",
+      },
     },
   },
   plugins: [],

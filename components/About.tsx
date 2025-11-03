@@ -32,7 +32,7 @@ export default function About() {
               our community and expert signals help you make informed decisions
               in the crypto and forex markets.
             </p>
-            <button className="mt-6 bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-full font-semibold transition">
+            <button className="btn-glow mt-6 bg-purple-950/90 hover:bg-purple-900 border-2 border-purple-500/40 hover:border-purple-400/60 px-6 py-3 rounded-full font-semibold transition-all backdrop-blur-sm">
               Learn More
             </button>
           </div>
@@ -45,10 +45,10 @@ export default function About() {
                 : "opacity-0 translate-x-10"
             }`}
           >
-            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 min-h-[300px] flex items-center justify-center">
-              <div className="text-center text-gray-400">
+            <div className="card-glow bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 min-h-[300px] flex items-center justify-center group cursor-pointer">
+              <div className="text-center text-gray-400 group-hover:text-gray-300 transition-colors">
                 <svg
-                  className="w-32 h-32 mx-auto mb-4 opacity-50"
+                  className="w-32 h-32 mx-auto mb-4 opacity-50 group-hover:opacity-70 transition-opacity"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >

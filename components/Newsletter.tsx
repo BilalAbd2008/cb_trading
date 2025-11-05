@@ -25,30 +25,39 @@ export default function Newsletter() {
     setStatus("loading");
 
     try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      // Save to localStorage
+      const stored = localStorage.getItem("newsletter_subscribers");
+      const subscribers = stored ? JSON.parse(stored) : [];
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus("success");
-        setMessage(
-          "Successfully subscribed! Check your email for the free guide."
-        );
-        setEmail("");
-        setAgreed(false);
-      } else {
+      // Check if email already exists
+      if (subscribers.some((sub: any) => sub.email === email)) {
         setStatus("error");
-        setMessage(data.error || "Something went wrong. Please try again.");
+        setMessage("This email is already subscribed!");
+        return;
       }
+
+      // Add new subscriber
+      const newSubscriber = {
+        id: Date.now().toString(),
+        email: email,
+        created_at: new Date().toISOString(),
+      };
+
+      subscribers.push(newSubscriber);
+      localStorage.setItem(
+        "newsletter_subscribers",
+        JSON.stringify(subscribers)
+      );
+
+      setStatus("success");
+      setMessage(
+        "Successfully subscribed! Check your email for the free guide."
+      );
+      setEmail("");
+      setAgreed(false);
     } catch (error) {
       setStatus("error");
-      setMessage("Failed to subscribe. Please try again later.");
+      setMessage("Something went wrong. Please try again.");
     }
   };
 

@@ -3,6 +3,7 @@
 import { Mail, CheckCircle2, TrendingUp, BookOpen, Bell } from "lucide-react";
 import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { supabase } from "@/lib/supabase";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,9 @@ export default function Newsletter() {
   >("idle");
   const [message, setMessage] = useState("");
   const { ref, isVisible } = useScrollAnimation();
+
+  // Discord invite link - ganti dengan link Discord CB Trading yang sebenarnya
+  const DISCORD_LINK = "https://discord.gg/cbtrading"; // GANTI DENGAN LINK DISCORD ASLI
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,25 +29,40 @@ export default function Newsletter() {
     setStatus("loading");
 
     try {
-      // Save to localStorage
-      const stored = localStorage.getItem("newsletter_subscribers");
-      const subscribers = stored ? JSON.parse(stored) : [];
+      // Check if email already exists in Supabase
+      const { data: existingSubscriber, error: checkError } = await supabase
+        .from("subscribers")
+        .select("email")
+        .eq("email", email)
+        .single();
 
-      // Check if email already exists
-      if (subscribers.some((sub: any) => sub.email === email)) {
+      if (existingSubscriber) {
         setStatus("error");
         setMessage("This email is already subscribed!");
         return;
       }
 
-      // Add new subscriber
-      const newSubscriber = {
+      // Insert new subscriber to Supabase
+      const { error: insertError } = await supabase.from("subscribers").insert([
+        {
+          email: email,
+          agreed_to_terms: agreed,
+          subscribed_at: new Date().toISOString(),
+        },
+      ]);
+
+      if (insertError) {
+        throw insertError;
+      }
+
+      // Success - save to localStorage as backup
+      const stored = localStorage.getItem("newsletter_subscribers");
+      const subscribers = stored ? JSON.parse(stored) : [];
+      subscribers.push({
         id: Date.now().toString(),
         email: email,
         created_at: new Date().toISOString(),
-      };
-
-      subscribers.push(newSubscriber);
+      });
       localStorage.setItem(
         "newsletter_subscribers",
         JSON.stringify(subscribers)
@@ -51,13 +70,19 @@ export default function Newsletter() {
 
       setStatus("success");
       setMessage(
-        "Successfully subscribed! Check your email for the free guide."
+        "Successfully subscribed! Redirecting to Discord in 2 seconds..."
       );
       setEmail("");
       setAgreed(false);
-    } catch (error) {
+
+      // Redirect to Discord after 2 seconds
+      setTimeout(() => {
+        window.open(DISCORD_LINK, "_blank");
+      }, 2000);
+    } catch (error: any) {
+      console.error("Subscription error:", error);
       setStatus("error");
-      setMessage("Something went wrong. Please try again.");
+      setMessage(error.message || "Something went wrong. Please try again.");
     }
   };
 

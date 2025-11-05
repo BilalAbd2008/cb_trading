@@ -13,6 +13,7 @@ import Navbar from "@/components/Navbar";
 import LeadMagnet from "@/components/LeadMagnet";
 import Newsletter from "@/components/Newsletter";
 import StickyJoinButton from "@/components/StickyJoinButton";
+import Blog from "@/components/Blog";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
       <Pricing />
       <Testimonials />
       <Team />
+      <Blog />
       <LeadMagnet />
       <div id="newsletter">
         <Newsletter />
